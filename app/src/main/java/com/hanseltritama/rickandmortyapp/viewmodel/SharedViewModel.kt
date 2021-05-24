@@ -3,7 +3,7 @@ package com.hanseltritama.rickandmortyapp.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hanseltritama.rickandmortyapp.data.CharacterResult
+import com.hanseltritama.rickandmortyapp.data.Result
 import com.hanseltritama.rickandmortyapp.network.RetrofitInstance
 import com.hanseltritama.rickandmortyapp.network.RetrofitService
 import kotlinx.coroutines.Dispatchers
@@ -14,12 +14,12 @@ class SharedViewModel : ViewModel() {
     private val retrofitInstance =
             RetrofitInstance.getInstance().create(RetrofitService::class.java)
 
-    val characterLiveData: MutableLiveData<CharacterResult> = MutableLiveData()
+    val characterLiveData: MutableLiveData<List<Result>> = MutableLiveData()
 
     fun getCharacter() {
         viewModelScope.launch(Dispatchers.IO) {
             val response = retrofitInstance.getAllCharacters()
-            characterLiveData.postValue(response)
+            characterLiveData.postValue(response.results)
         }
     }
 }

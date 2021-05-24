@@ -3,7 +3,9 @@ package com.hanseltritama.rickandmortyapp.data
 
 import com.google.gson.annotations.SerializedName
 
-data class CharacterResult(
-    val info: Info,
-    val results: List<Result>
+data class Info(
+    val count: Int,
+    val pages: Int,
+    val next: String,
+    val prev: Any
 )
